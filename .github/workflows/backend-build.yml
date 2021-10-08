@@ -6,10 +6,15 @@ on:
   pull_request:
     branches: master
 
+defaults:
+  run:
+    working-directory: EventRegistration-Backend
+
+
 jobs:
   build:
 
-    runs-on: Windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -19,11 +24,13 @@ jobs:
         java-version: '16'
         distribution: 'adopt'
         cache: gradle
-    - name: Validate Gradle wrapper
-      uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
-      working-directory: EventRegistration-Backend
     - name: Build with Gradle
       run: ./gradlew build
-      working-directory: EventRegistration-Backend
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "eventregistration-backend-ding" #Must be unique in Heroku
+        heroku_email: "ding.ma@mail.mcgill.ca"
+
