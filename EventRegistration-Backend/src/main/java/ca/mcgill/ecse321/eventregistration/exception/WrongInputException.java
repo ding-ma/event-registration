@@ -2,7 +2,7 @@ package ca.mcgill.ecse321.eventregistration.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class WrongInputException extends RuntimeException {
+public class WrongInputException extends IllegalArgumentException {
     private HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 
     public HttpStatus getHttpStatus() {
