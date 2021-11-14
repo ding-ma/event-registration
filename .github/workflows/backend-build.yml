@@ -3,9 +3,7 @@ name: Java CI with Gradle
 on:
   push:
     branches: master
-  pull_request:
-    branches: master
-  paths:
+    paths:
       - 'EventRegistration-Backend/**'
 
 defaults:
@@ -35,5 +33,5 @@ jobs:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "eventregistration-backend-ding" #Must be unique in Heroku
         heroku_email: "ding.ma@mail.mcgill.ca"
-        dontuseforce: 1
+        dontuseforce: false
 
