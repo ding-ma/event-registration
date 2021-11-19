@@ -36,3 +36,18 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+
+task("integrationTest") {
+	def stdout = new ByteArrayOutputStream()
+	doLast {
+		exec {
+			println 'Welcome in the Baeldung!'
+//			workingDir "$projectDir"
+//			commandLine './shell_script_name.sh'
+//			commandLine 'touch', 'src/test/java/ca/mcgill/ecse321/eventregistration/integration/cc.json'
+
+			standardOutput = stdout;
+		}
+	}
+}

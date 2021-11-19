@@ -26,9 +26,18 @@ export default {
   data () {
     return {
       persons: [],
+      events: [],
       newPerson: '',
       errorPerson: '',
-      response: []
+      response: [],
+      newEvent: {
+        name: '',
+        eventDate: '2017-12-08',
+        startTime: '09:00',
+        endTime: '11:00'
+      },
+      errorEvent: '',
+      errorRegistration: ''
     }
   },
   created: function () {
@@ -50,6 +59,14 @@ export default {
       this.errorEvent = e
       // this.errors.push(e)
     })
+    // Initializing events
+    AXIOS.get('/events')
+    .then(response => {
+      this.events = response.data
+    })
+    .catch(e => {
+      this.errorEvent = e
+    })
   },
   methods: {
     createPerson: function (personName) {
@@ -65,6 +82,49 @@ export default {
           console.log(errorMsg)
           this.errorPerson = errorMsg
         })
+    },
+    registerEvent: function (personName, eventName) {
+      var indexEv = this.events.map(x => x.name).indexOf(eventName)
+      var indexPart = this.persons.map(x => x.name).indexOf(personName)
+      var person = this.persons[indexPart]
+      var event = this.events[indexEv]
+      AXIOS.post('/register', {},
+        {params: {
+          person: person.name,
+          event: event.name}})
+      .then(response => {
+        // Update appropriate DTO collections
+        person.events.push(event)
+        this.selectedPerson = ''
+        this.selectedEvent = ''
+        this.errorRegistration = ''
+      })
+      .catch(e => {
+        var errorMsg = e
+        console.log(errorMsg.message)
+        this.errorRegistration = errorMsg
+      })
+    },
+    createEvent: function (name, eventDate, startTime, endTime) {
+      console.log(name, eventDate, startTime, endTime)
+      AXIOS.post('/events/'.concat(name), {},
+        {params: {
+          date: eventDate,
+          startTime: startTime,
+          endTime: endTime}})
+      .then(response => {
+        // Update appropriate DTO collections
+        this.events.push({name, eventDate, startTime, endTime})
+        this.selectedPerson = ''
+        this.selectedEvent = ''
+        this.errorRegistration = ''
+      })
+      .catch(e => {
+        var errorMsg = e
+        console.log(errorMsg.response.data)
+        console.log({e})
+        this.errorRegistration = errorMsg.response.data
+      })
     }
   }
 }

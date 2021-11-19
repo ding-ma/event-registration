@@ -87,7 +87,7 @@ public class EventRegistrationService {
         }
         error = error.trim();
         if (error.length() > 0) {
-            throw new IllegalArgumentException(error);
+            throw new WrongInputException(HttpStatus.BAD_REQUEST,error);
         }
 
         Event event = new Event();
