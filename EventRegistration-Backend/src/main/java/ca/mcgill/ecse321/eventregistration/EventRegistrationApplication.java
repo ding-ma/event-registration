@@ -22,7 +22,7 @@ public class EventRegistrationApplication {
 	@RequestMapping("/")
 	public String greeting(){
 
-		return "Hello world! from github actions";
+		return "Hello world! from github actions!";
 	}
 
 

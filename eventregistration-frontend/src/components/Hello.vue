@@ -1,25 +1,32 @@
 <template>
   <div class="hello">
     <h1>{{ msg }} from github actions!!!</h1>
-       <router-link to="/test">test page</router-link>
-       <router-link to="/app">app page</router-link>
+    <li>
+      <ul>
+        <router-link to="/test">test page</router-link>
+      </ul>
+      <ul>
+        <router-link to="/app">app page</router-link>
+      </ul>
+    </li>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'hello',
-  data () {
+  name: "hello",
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+      msg: "Welcome to Your Vue.js App",
+    };
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 
