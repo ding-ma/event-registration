@@ -21,6 +21,73 @@
     </tr>
 </table>
   <span v-if="errorPerson" style="color:red">Error: {{errorPerson}} </span>
+<hr>
+ ​<h2>Events</h2>
+ ​<table>
+   ​<tr>
+     ​<th>Event Name</th>
+     ​<th>Date</th>
+     ​<th>Start</th>
+     ​<th>End</th>
+     ​<!--<th>Edit</th>-->
+   ​</tr>
+   ​<tr v-for="event in events">
+     ​<td>{{ event.name }}</td>
+     ​<td>{{ event.eventDate }}</td>
+     ​<td>{{ event.startTime }}</td>
+     ​<td>{{ event.endTime }}</td>
+     ​<!--<td>
+       ​<button v-on:click="updateEvent(event.name)">Edit</button>
+     ​</td>-->
+   ​</tr>
+ ​</table>
+     ​<span v-if="errorEvent" style="color:red">Error: {{errorEvent}} </span>
+<hr>
+     <!-- Add this to the bottom of the table created for displaying events -->
+  <tr>
+      <td>
+        <input type="text" v-model="newEvent.name" placeholder="Event Name">
+      </td>
+      <td>
+        <input type="date" v-model="newEvent.eventDate" placeholder="YYYY-MM-DD">
+      </td>
+      <td>
+        <input type="time" v-model="newEvent.startTime" placeholder="HH:mm">
+      </td>
+      <td>
+        <input type="time" v-model="newEvent.endTime" placeholder="HH:mm">
+      </td>
+      <td>
+        <button
+          <button v-bind:disabled="!newEvent.name" v-on:click="createEvent(newEvent.name, newEvent.eventDate, newEvent.startTime, newEvent.endTime)">Create</button>
+      </td>
+
+  </tr>
+            ​<span v-if="errorRegistration" style="color:red">Error: {{errorRegistration}} </span>
+          ​<span v-if="errorEvent" style="color:red">Error: {{errorEvent}} </span>
+<option disabled value="">Please select one</option>
+ <hr>
+    <h2>Registrations</h2>
+    <label>Person:
+      <select v-model="selectedPerson">
+        <option disabled value="">Please select one</option>
+        <option v-for="person in persons" >
+          {{ person.name }}
+        </option>
+      </select>
+    </label>
+    <label>Event:
+      <select v-model="selectedEvent">
+        <option disabled value="">Please select one</option>
+        <option v-for="event in events" >
+          {{ event.name }}
+        </option>
+      </select>
+    </label>
+    <button  @click="registerEvent(selectedPerson,selectedEvent)">Register</button>
+    <hr>
+
+
   </div>
 </template>
 <script src="./registration.js">

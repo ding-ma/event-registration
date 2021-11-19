@@ -1,8 +1,6 @@
 <template>
   <div class="hello">
     <h1>{{ msg }} from github actions!!!</h1>
-       <router-link to="/test">test page</router-link>
-       <router-link to="/app">app page</router-link>
   </div>
 </template>
 
@@ -11,7 +9,7 @@ export default {
   name: 'hello',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to your second page'
     }
   }
 }
